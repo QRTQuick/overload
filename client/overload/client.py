@@ -2,7 +2,7 @@ import requests
 from typing import List, Dict, Union
 from .exceptions import OverloadError, AnalysisError, RateLimitError
 
-BASE_URL = "https://your-render-url.onrender.com"  # Update this after deployment
+BASE_URL = "https://overload-api.onrender.com"
 
 def analyze(code_or_file: Union[str, object], timeout: int = 30) -> List[Dict]:
     """
