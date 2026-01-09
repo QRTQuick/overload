@@ -8,3 +8,5 @@ services:
     envVars:
       - key: APP_ENV
         value: production
+      - key: RENDER_EXTERNAL_URL
+        value: https://overload-api.onrender.com
