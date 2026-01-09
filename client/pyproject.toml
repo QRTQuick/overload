@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "overload"
+version = "1.0.0"
+description = "AI-powered Python bug identification client"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.8"
+authors = [
+    {name = "Chisom life eke", email = "your.email@example.com"},
+]
+maintainers = [
+    {name = "Chisom life eke", email = "your.email@example.com"},
+]
+keywords = ["python", "ai", "bug-detection", "static-analysis", "linting"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "requests>=2.25.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/QRTQuick/overload"
+Documentation = "https://github.com/QRTQuick/overload#readme"
+Repository = "https://github.com/QRTQuick/overload.git"
+Issues = "https://github.com/QRTQuick/overload/issues"
+Changelog = "https://github.com/QRTQuick/overload/blob/main/CHANGELOG.md"
+
+[tool.setuptools]
+zip-safe = false
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["overload*"]
+
+[tool.setuptools.package-data]
+overload = ["*.md", "*.txt"]
