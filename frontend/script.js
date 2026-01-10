@@ -15,6 +15,9 @@ function initializeApp() {
     resultsContainer = document.getElementById('resultsContainer');
     loadingOverlay = document.getElementById('loadingOverlay');
 
+    // Welcome voice message for desktop
+    playWelcomeMessage();
+
     // Character counter
     if (codeInput) {
         codeInput.addEventListener('input', updateCharCount);
@@ -38,29 +41,167 @@ function initializeApp() {
         });
     });
 
-    // Circular menu toggle
-    const circularBtn = document.getElementById('circularBtn');
-    const circularNav = document.querySelector('.circular-nav');
-    
-    if (circularBtn && circularNav) {
-        circularBtn.addEventListener('click', function() {
-            circularNav.classList.toggle('active');
-            circularBtn.classList.toggle('active');
+    // Circular menu toggle with trigonometry
+    const centerBtn = document.getElementById('circularBtn');
+    const items = document.querySelectorAll('.nav-item');
+
+    let open = false;
+    // Adjust radius based on screen size
+    const radius = window.innerWidth <= 768 ? 70 : 80;
+
+    if (centerBtn && items.length > 0) {
+        centerBtn.addEventListener('click', function() {
+            open = !open;
+            centerBtn.classList.toggle('active');
+
+            items.forEach((item, index) => {
+                // Calculate angle for each item (evenly distributed)
+                const angle = (2 * Math.PI / items.length) * index;
+
+                // Calculate x and y positions using trigonometry
+                const x = radius * Math.cos(angle);
+                const y = radius * Math.sin(angle);
+
+                if (open) {
+                    // Add slight delay for staggered animation effect
+                    setTimeout(() => {
+                        item.style.transform = `translate(${x}px, ${y}px)`;
+                        item.style.opacity = '1';
+                    }, index * 50);
+                } else {
+                    // Return items to center (hidden) with slight delay
+                    setTimeout(() => {
+                        item.style.transform = `translate(-50%, -50%)`;
+                        item.style.opacity = '0';
+                    }, index * 30);
+                }
+            });
         });
-        
+
         // Close menu when clicking outside
         document.addEventListener('click', function(e) {
-            if (!circularNav.contains(e.target)) {
-                circularNav.classList.remove('active');
-                circularBtn.classList.remove('active');
+            const radialNav = document.querySelector('.radial-nav');
+            if (!radialNav.contains(e.target) && open) {
+                open = false;
+                centerBtn.classList.remove('active');
+
+                items.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.style.transform = `translate(-50%, -50%)`;
+                        item.style.opacity = '0';
+                    }, index * 30);
+                });
             }
         });
-        
+
         // Close menu when clicking menu items
-        document.querySelectorAll('.menu-item').forEach(item => {
+        items.forEach(item => {
             item.addEventListener('click', function() {
-                circularNav.classList.remove('active');
-                circularBtn.classList.remove('active');
+                open = false;
+                centerBtn.classList.remove('active');
+
+                items.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.style.transform = `translate(-50%, -50%)`;
+                        item.style.opacity = '0';
+                    }, index * 30);
+                });
+            });
+        });
+    }
+
+    // Bubble Bottom Navigation
+    const bubbleItems = document.querySelectorAll('.bubble-nav .nav-item');
+
+    if (bubbleItems.length > 0) {
+        bubbleItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove active class from all items
+                bubbleItems.forEach(i => i.classList.remove('active'));
+
+                // Add active class to clicked item
+                this.classList.add('active');
+
+                // Smooth scroll to corresponding section
+                const sectionId = this.getAttribute('data-section');
+                if (sectionId) {
+                    const targetElement = document.getElementById(sectionId) || document.querySelector(`[id="${sectionId}"]`);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+
+                // Add haptic feedback if available
+                if (navigator.vibrate) {
+                    navigator.vibrate(10);
+                }
+            });
+        });
+
+        // Update active state based on scroll position
+        function updateActiveBubbleOnScroll() {
+            const sections = ['analyzer', 'features', 'testimonials', 'docs', 'contact'];
+            const scrollPosition = window.scrollY + 100; // Offset for navbar
+
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId) || document.querySelector(`[id="${sectionId}"]`);
+                if (section) {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        // Remove active from all
+                        bubbleItems.forEach(item => item.classList.remove('active'));
+
+                        // Add active to corresponding nav item
+                        const activeItem = document.querySelector(`.nav-item[data-section="${sectionId}"]`);
+                        if (activeItem) {
+                            activeItem.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Listen for scroll events
+        window.addEventListener('scroll', updateActiveBubbleOnScroll);
+
+        // Initial check
+        updateActiveBubbleOnScroll();
+    }
+
+    // Hamburger Menu
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileNavMenu = document.getElementById('mobileNavMenu');
+
+    if (hamburgerBtn && mobileNavMenu) {
+        let menuOpen = false;
+
+        hamburgerBtn.addEventListener('click', function() {
+            menuOpen = !menuOpen;
+            hamburgerBtn.classList.toggle('active');
+            mobileNavMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!hamburgerBtn.contains(e.target) && !mobileNavMenu.contains(e.target) && menuOpen) {
+                menuOpen = false;
+                hamburgerBtn.classList.remove('active');
+                mobileNavMenu.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking menu items
+        const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+        mobileNavItems.forEach(item => {
+            item.addEventListener('click', function() {
+                menuOpen = false;
+                hamburgerBtn.classList.remove('active');
+                mobileNavMenu.classList.remove('active');
             });
         });
     }
@@ -95,6 +236,34 @@ function updateCharCount() {
         } else {
             charCount.style.color = '#64748b';
         }
+    }
+}
+
+// Welcome voice message for desktop
+function playWelcomeMessage() {
+    // Only play on desktop (screen width > 768px)
+    if (window.innerWidth > 768 && 'speechSynthesis' in window) {
+        // Small delay to ensure page is loaded
+        setTimeout(() => {
+            const utterance = new SpeechSynthesisUtterance('Welcome to Overload');
+            utterance.rate = 0.8; // Slightly slower
+            utterance.pitch = 1; // Normal pitch
+            utterance.volume = 0.7; // Not too loud
+            
+            // Try to use a nice voice if available
+            const voices = speechSynthesis.getVoices();
+            const preferredVoice = voices.find(voice => 
+                voice.name.includes('Female') || 
+                voice.name.includes('Samantha') || 
+                voice.name.includes('Victoria')
+            );
+            
+            if (preferredVoice) {
+                utterance.voice = preferredVoice;
+            }
+            
+            speechSynthesis.speak(utterance);
+        }, 1000); // 1 second delay
     }
 }
 

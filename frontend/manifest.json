@@ -1,0 +1,26 @@
+{
+    "name": "Overload - AI-Powered Python Bug Detection",
+    "short_name": "Overload",
+    "description": "AI-powered Python code analysis tool built by Chisom Life Eke",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#f8fafc",
+    "theme_color": "#6366f1",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en-US",
+    "categories": ["developer", "productivity", "utilities"],
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "developer": {
+        "name": "Chisom Life Eke",
+        "url": "https://github.com/QRTQuick"
+    },
+    "version": "1.0.0"
+}
