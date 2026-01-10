@@ -13,26 +13,28 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="container">
-            <div class="nav-brand">
-                <span>🧠 Overload</span>
-                <span class="version">v1.0</span>
-            </div>
-            <div class="nav-links">
-                <a href="#analyzer">Analyzer</a>
-                <a href="#features">Features</a>
-                <a href="#testimonials">Testimonials</a>
-                <a href="#docs">Docs</a>
-                <a href="https://github.com/QRTQuick/overload" target="_blank">
-                    <i class="fab fa-github"></i> GitHub
+    <!-- Circular Navigation -->
+    <nav class="circular-nav">
+        <div class="circular-menu">
+            <button class="circular-btn" id="circularBtn">
+                <i class="fas fa-brain"></i>
+            </button>
+            <div class="circular-menu-items">
+                <a href="#analyzer" class="menu-item" data-tooltip="Analyzer">
+                    <i class="fas fa-code"></i>
                 </a>
-            </div>
-            <div class="nav-mobile">
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <a href="#features" class="menu-item" data-tooltip="Features">
+                    <i class="fas fa-star"></i>
+                </a>
+                <a href="#testimonials" class="menu-item" data-tooltip="Testimonials">
+                    <i class="fas fa-users"></i>
+                </a>
+                <a href="#docs" class="menu-item" data-tooltip="Docs">
+                    <i class="fas fa-book"></i>
+                </a>
+                <a href="https://github.com/QRTQuick/overload" target="_blank" class="menu-item" data-tooltip="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
             </div>
         </div>
     </nav>
@@ -41,18 +43,31 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i>
+                    <span>AI-Powered Code Analysis</span>
+                </div>
                 <h1>AI-Powered Python Bug Detection</h1>
                 <p class="hero-subtitle">Transform your Python development workflow with intelligent static analysis. Overload uses advanced Large Language Models to automatically detect bugs, security vulnerabilities, and performance issues before they reach production. Join thousands of developers who write better code, faster.</p>
                 <div class="hero-stats">
                     <div class="stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
                         <span class="stat-number">10K+</span>
                         <span class="stat-label">Bugs Detected</span>
                     </div>
                     <div class="stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
                         <span class="stat-number">99.9%</span>
                         <span class="stat-label">Uptime</span>
                     </div>
                     <div class="stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
                         <span class="stat-number">< 2s</span>
                         <span class="stat-label">Analysis Time</span>
                     </div>
@@ -66,6 +81,45 @@
                     </button>
                 </div>
                 <p class="hero-trust">Trusted by developers at <strong>NorvinTech</strong>, <strong>Microsoft</strong>, and <strong>open source projects worldwide</strong></p>
+            </div>
+            <div class="hero-visual">
+                <div class="code-preview">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="code-title">analyzer.py</span>
+                    </div>
+                    <div class="code-content">
+                        <pre><code>from overload import analyze
+
+# Your Python code here
+def process_data(data):
+    result = []
+    for item in data:
+        if item > 0:  # Potential bug detected
+            result.append(item * 2)
+    return result
+
+# AI Analysis Results:
+# ⚠️  Line 5: Inefficient list comprehension
+# 🔴 Line 6: Missing error handling
+# ✅ Code quality: 7.2/10</code></pre>
+                    </div>
+                </div>
+                <div class="floating-elements">
+                    <div class="floating-icon icon-1">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div class="floating-icon icon-2">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="floating-icon icon-3">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -132,6 +186,11 @@ print(result)"></textarea>
             <h2><i class="fas fa-star"></i> Why Choose Overload?</h2>
             <div class="features-grid">
                 <div class="feature-card">
+                    <div class="feature-visual">
+                        <div class="feature-bg">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                    </div>
                     <div class="feature-icon">
                         <i class="fas fa-bug"></i>
                     </div>
@@ -144,6 +203,11 @@ print(result)"></textarea>
                     </ul>
                 </div>
                 <div class="feature-card">
+                    <div class="feature-visual">
+                        <div class="feature-bg">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                    </div>
                     <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
@@ -156,6 +220,11 @@ print(result)"></textarea>
                     </ul>
                 </div>
                 <div class="feature-card">
+                    <div class="feature-visual">
+                        <div class="feature-bg">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                    </div>
                     <div class="feature-icon">
                         <i class="fas fa-rocket"></i>
                     </div>
@@ -168,6 +237,11 @@ print(result)"></textarea>
                     </ul>
                 </div>
                 <div class="feature-card">
+                    <div class="feature-visual">
+                        <div class="feature-bg">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                    </div>
                     <div class="feature-icon">
                         <i class="fas fa-plug"></i>
                     </div>
@@ -218,10 +292,15 @@ curl -X POST https://overload-api.onrender.com/analyze \
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials">
         <div class="container">
-            <h2><i class="fas fa-quote-left"></i> What Developers Say</h2>
-            <p class="section-subtitle">Hear from developers who have improved their code quality with Overload</p>
+            <div class="section-header">
+                <h2><i class="fas fa-quote-left"></i> What Developers Say</h2>
+                <p class="section-subtitle">Hear from developers who have improved their code quality with Overload</p>
+            </div>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
+                    <div class="testimonial-visual">
+                        <i class="fas fa-code"></i>
+                    </div>
                     <div class="testimonial-content">
                         <p>"Overload caught a critical security vulnerability in my Flask app that I completely missed. The AI analysis is incredibly thorough and saved me from a potential data breach."</p>
                     </div>
@@ -234,6 +313,9 @@ curl -X POST https://overload-api.onrender.com/analyze \
                     </div>
                 </div>
                 <div class="testimonial-card">
+                    <div class="testimonial-visual">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
                     <div class="testimonial-content">
                         <p>"The performance insights are game-changing. Overload helped me optimize my data processing pipeline, reducing execution time by 40%. Highly recommended!"</p>
                     </div>
@@ -246,6 +328,9 @@ curl -X POST https://overload-api.onrender.com/analyze \
                     </div>
                 </div>
                 <div class="testimonial-card">
+                    <div class="testimonial-visual">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
                     <div class="testimonial-content">
                         <p>"As a solo developer, Overload acts like having a senior code reviewer available 24/7. It catches bugs I would have spent hours debugging."</p>
                     </div>
@@ -272,7 +357,7 @@ curl -X POST https://overload-api.onrender.com/analyze \
                         <i class="fas fa-envelope"></i>
                         <div>
                             <h4>Email</h4>
-                            <p>hello@overload.dev</p>
+                            <p>chisomlifeeke@gmail.com</p>
                         </div>
                     </div>
                     <div class="contact-item">
