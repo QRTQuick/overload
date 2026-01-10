@@ -9,7 +9,7 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
     color: #1f2937;
-    background: linear-gradient(135deg, #ffffff 0%, #fff7ed 100%);
+    background: linear-gradient(135deg, #000000 0%, #ff6b35 50%, #ffffff 100%);
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
@@ -71,7 +71,7 @@ body::before {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #ff6b35 0%, #dc2626 100%);
+    background: linear-gradient(135deg, #000000 0%, #ff6b35 100%);
     border: none;
     color: #fff;
     font-size: 1.2rem;
@@ -121,7 +121,7 @@ body::before {
     background: linear-gradient(135deg, #000 0%, #333 100%);
     backdrop-filter: blur(10px);
     border: 2px solid #ff6b35;
-    color: #ffeb3b;
+    color: #ffffff;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -148,10 +148,10 @@ body::before {
 }
 
 .nav-item:hover {
-    background: linear-gradient(135deg, #ff6b35 0%, #dc2626 100%);
+    background: linear-gradient(135deg, #ff6b35 0%, #000000 100%);
     color: #fff;
     transform: translate(-50%, -50%) scale(1.15);
-    border-color: #ffeb3b;
+    border-color: #ffffff;
     box-shadow: 0 6px 25px rgba(255, 107, 53, 0.6);
 }
 
@@ -352,6 +352,90 @@ body::before {
     }
 }
 
+@keyframes textRainbow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes textFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes textGlow {
+    0% {
+        text-shadow: 0 0 5px rgba(255, 107, 53, 0.5);
+        color: rgba(255, 255, 255, 0.9);
+    }
+    100% {
+        text-shadow: 0 0 20px rgba(255, 107, 53, 0.8), 0 0 30px rgba(255, 107, 53, 0.6);
+        color: #ffffff;
+    }
+}
+
+@keyframes badgePulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 8px rgba(255, 107, 53, 0.1);
+    }
+}
+
+@keyframes statBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes iconSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes headerColorShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes iconPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
 .nav-item {
     display: flex;
     align-items: center;
@@ -482,7 +566,7 @@ body::before {
 /* Hero Section */
 .hero {
     padding: 120px 0 100px;
-    background: linear-gradient(135deg, #ff6b35 0%, #dc2626 100%);
+    background: linear-gradient(135deg, #000000 0%, #ff6b35 50%, #ffffff 100%);
     color: white;
     text-align: center;
     position: relative;
@@ -520,7 +604,7 @@ body::before {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(220, 38, 38, 0.1) 100%);
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
     backdrop-filter: blur(10px);
     padding: 0.5rem 1rem;
     border-radius: 25px;
@@ -530,6 +614,7 @@ body::before {
     border: 1px solid rgba(255, 107, 53, 0.3);
     color: #ff6b35;
     position: relative;
+    animation: badgePulse 2s ease-in-out infinite;
 }
 
 .hero-badge::before {
@@ -549,6 +634,12 @@ body::before {
     margin-bottom: 1.5rem;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     line-height: 1.1;
+    background: linear-gradient(45deg, #ff6b35, #ffffff, #000000, #ff6b35);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: textRainbow 3s ease-in-out infinite, textFloat 6s ease-in-out infinite;
 }
 
 .hero-subtitle {
@@ -557,6 +648,7 @@ body::before {
     margin-bottom: 3rem;
     max-width: 600px;
     line-height: 1.6;
+    animation: textGlow 4s ease-in-out infinite alternate;
 }
 
 .hero-stats {
@@ -567,12 +659,13 @@ body::before {
 
 .stat {
     text-align: center;
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(220, 38, 38, 0.1) 100%);
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
     backdrop-filter: blur(10px);
     padding: 1.5rem;
     border-radius: 16px;
     border: 1px solid rgba(255, 107, 53, 0.3);
     position: relative;
+    animation: statBounce 3s ease-in-out infinite;
 }
 
 .stat::before {
@@ -588,16 +681,17 @@ body::before {
 
 .stat-icon {
     font-size: 2rem;
-    color: #ffeb3b;
+    color: #ff6b35;
     margin-bottom: 0.5rem;
-    filter: drop-shadow(0 0 8px rgba(255, 235, 59, 0.5));
+    filter: drop-shadow(0 0 8px rgba(255, 107, 53, 0.5));
+    animation: iconSpin 4s linear infinite;
 }
 
 .stat-number {
     display: block;
     font-size: 2.5rem;
     font-weight: 800;
-    color: #fbbf24;
+    color: #ff6b35;
     margin-bottom: 0.5rem;
 }
 
@@ -755,10 +849,17 @@ section h2 {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    background: linear-gradient(45deg, #000000, #ff6b35, #ffffff, #000000);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: headerColorShift 5s ease-in-out infinite;
 }
 
 section h2 i {
-    color: #3b82f6;
+    color: #ff6b35;
+    animation: iconPulse 3s ease-in-out infinite;
 }
 
 .section-header {
